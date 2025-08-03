@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Can3Tok: Canonical 3D Tokenization and Latent Modeling of Scene-Level 3D Gaussians">
+  <meta name="keywords" content="3D Generation, Novel View Synthesis, 3D Gaussian
+  Splatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Can3Tok</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <script type="text/x-mathjax-config"> 
+        MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); 
+  </script>
+  <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+              processEscapes: true
+            }
+        });
+  </script>
+
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+  </script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/usc_logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Can3Tok: Canonical 3D Tokenization and Latent Modeling of Scene-Level 3D Gaussians</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zerg-overmind.github.io/">Quankai Gao</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://iliyan.com/">Iliyan Georgiev</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://tuanfeng.github.io/">Tuanfeng Y. Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://krsingh.cs.ucdavis.edu/">Krishna Kumar Singh</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=MHet2VoAAAAJ&hl=en">Ulrich Neumann</a><sup>1+</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://gorokee.github.io/jsyoon/">Jae Shin Yoon</a><sup>2+</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Southern California,</span>
+            <span class="author-block"><sup>2</sup>Adobe Research,</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="Can3Tok.github.io"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <!-- arxiv -->
+                <a href="Can3Tok.github.io" 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://youtu.be/0qRcjTw7-YU"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Zerg-Overmind/Can3Tok"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <img src="static/images/teaser.png" alt="empty">
+        <p>
+          <br />
+         Previous 3D VAE models fail to converge on more than a thousand input scene representations.
+        </p>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="60%" weight="60">
+        <source src="./static/videos/teaser_video.mp4"
+                type="video/mp4">
+      </video>
+      
+    </div>
+  </div>
+</section> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D generation has made significant progress, however, it
+            still largely remains at the object-level. Feedforward 3D
+            scene-level generation has been rarely explored due to the
+            lack of models capable of scaling-up latent representation
+            learning on 3D scene-level data. Unlike object-level generative models, which are trained on well-labeled 3D data
+            in a bounded canonical space, scene-level generations with
+            3D scenes represented by 3D Gaussian Splatting (3DGS)
+            are unbounded and exhibit scale inconsistency across different scenes, making unified latent representation learning
+            for generative purposes extremely challenging. In this paper, we introduce Can3Tok, the first 3D scene-level varia-
+            tional autoencoder (VAE) capable of encoding a large number of Gaussian primitives into a low-dimensional latent
+            embedding, which effectively captures both semantic and
+            spatial information of the inputs. Beyond model design,
+            we propose a general pipeline for 3D scene data processing to address scale inconsistency issue. We validate our
+            method on the recent scene-level 3D dataset DL3DV-10K,
+            where we found that only Can3Tok successfully generalizes to novel 3D scenes, while compared methods fail to
+            converge on even a few hundred scene inputs during training and exhibit zero generalization ability during inference.
+            Finally, we demonstrate image-to-3DGS and text-to-3DGS
+            generation as our applications to demonstrate its ability
+            to facilitate downstream generation tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="./static/images/white.mp4"
+                  frameborder="0" allow="autoplay; encrypted-media" ></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Model Architecture</h2>
+        <!-- Interpolating. -->
+        <img src="./static/images/pipeline.png" class="interpolation-image" alt="Interpolate start reference image."/>
+        <p>
+          <br />
+          Can3Tok processes a batch of per-scene 3D Gaussians, with a batch size of B, where each scene contains the same number of
+          Gaussians N. The encoder encodes input Gaussians into a low-dimensional latent space followed by a VAE reparametrization. And the
+          decoder reconstructs the embeddings back into 3D space, corresponding to the original input 3D Gaussians
+        </p>
+      <!--/ Interpolating. -->
+      </div>
+    </div>
+    <!--/ Method. -->
+    <br />
+    <!-- Results -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+        <h3 class="title is-4">1. Text-to-3D Generation</h3>
+        <img src="./static/images/text-to-3d.png" class="interpolation-image" alt="Empty"/> 
+        <br />
+        <br />
+        <h3 class="title is-4">2. Image-to-3D Generation</h3>
+        <img src="./static/images/img-to-3d.png" class="interpolation-image" alt="Empty"/>
+        <br />
+        <p>
+          <br />
+          Visualization of optical and Gaussian flows on the input view and a novel view. ``Ours (no flow)'' denotes our model without flow supervision while ``Ours'' is our full model. Note that optical flow values of the background should be ignored because dense optical flow algorithms calculate correspondences among background pixels. We calculate optical flow $flow^o_{t_1t_2}$ on rendered sequences by autoflow. From the $\#$1 and the $\#$4 column, we can see that both rendered sequences on input view have high-quality optical flow, indicating correct motions and appearance. Comparing Gaussian flows at the $\#$2 and the $\#$5 column, we can see that the underlining Gaussians will move inconsistently without flow supervision. It is due to the ambiguity of appearance and motions while only being optimized by photometric loss on a single input view. Aligning Gaussian flow to optical flow can drastically improve irregular motions ( $\#$3 column) and create high-quality dynamic motions ($\#$6 column) on novel views.
+        </p>
+        <br />
+   
+        <h4 class="title is-5">More Results</h4>
+        <img src="./static/images/more_results.png" class="interpolation-image" alt="Empty"/>
+        <br />
+        <br />
+
+        
+        
+      
+        
+    
+        <!-- <video class="video_back" src="./static/videos/dynerf_comp_texture.mp4" muted playsinline autoplay="autoplay" loop="loop">
+        </video>
+        <video class="video_back" src="./static/videos/dynerf_comp_depth.mp4" muted playsinline autoplay="autoplay" loop="loop">
+        </video>  -->
+
+
+         <br /> 
+        <h2 class="title is-3">Acknowledgments</h2>
+        <p>
+          <br />
+          We thank the following great works <a href="https://arxiv.org/abs/2107.14795">Perceiver IO</a>, <a href="https://github.com/NeuralCarver/Michelangelo">Michelangelo</a>, <a href="https://github.com/luca-medeiros/lang-segment-anything">LangSAM</a>, <a href="https://github.com/POSTECH-CVLab/point-transformer">PointTransformer</a>, and <a href="https://github.com/graphdeco-inria/gaussian-splatting">3DGS</a> for their codes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@INPROCEEDINGS{gao2023ICCV,
+  author = {Quankai Gao and Iliyan Georgiev and Tuanfeng Y. Wang and Krishna Kumar Singh and Ulrich Neumann and Jae Shin Yoon},
+  title = {Can3Tok: Canonical 3D Tokenization and Latent Modeling of Scene-Level 3D Gaussians},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year = {2025}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
