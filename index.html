@@ -157,7 +157,7 @@
         <img src="static/images/teaser.png" alt="empty">
         <p>
           <br />
-         Previous 3D VAE models fail to converge on more than a thousand input scene representations.
+         We present inference results on unseen 3DGS inputs. Previous 3D VAE models even fail to converge on over a thousand scene-level 3DGS representations <strong>during training</strong>.
         </p>
     </div>
   </div>
@@ -221,6 +221,24 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Inconsistent Scale Across Different Scenes</h2>
+        <!-- Interpolating. -->
+        <img src="./static/images/scene_variation.png" class="interpolation-image" alt="Interpolate start reference image."/>
+        <p>
+          <br />
+         Scene-level representations exhibit varying levels of detail. Also, SfM point clouds and camera poses optimized from COLMAP are inherently not guaranteed to be in a canonical scale, making it difficult for VAE models to learn a unified and smooth latent space across different scenes.
+         Therefore, 3DGS representations optimized using camera poses and initial SfM point clouds from COLMAP or other metric-scale estimations must be normalized to ensure a unified latent representation.
+        </p>
+      <!--/ Interpolating. -->
+      </div>
+    </div>
+    <!--/ Method. -->
+    <br />
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -232,53 +250,92 @@
         <img src="./static/images/pipeline.png" class="interpolation-image" alt="Interpolate start reference image."/>
         <p>
           <br />
-          Can3Tok processes a batch of per-scene 3D Gaussians, with a batch size of B, where each scene contains the same number of
+          Even with the normalization, naïve convolutional-based architectures struggle to generalize on unseen scene-level 3D structure (also found by <a href="https://arxiv.org/abs/2503.14445">Bolt3D</a>), highlighting the need for improved model design. Can3Tok processes a batch of per-scene 3D Gaussians, with a batch size of B, where each scene contains the same number of
           Gaussians N. The encoder encodes input Gaussians into a low-dimensional latent space followed by a VAE reparametrization. And the
-          decoder reconstructs the embeddings back into 3D space, corresponding to the original input 3D Gaussians
+          decoder reconstructs the embeddings back into 3D space, corresponding to the original input 3D Gaussians.
         </p>
       <!--/ Interpolating. -->
       </div>
     </div>
     <!--/ Method. -->
     <br />
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Latent Analysis</h2>
+        <!-- Interpolating. -->
+        <img src="./static/images/latent_analysis.png" class="interpolation-image" alt="Interpolate start reference image."/>
+        <p>
+          <br />
+          To illustrate the intuition behind our model's ability to generalize to unseen scene-level 3DGS representations, we showcase the t-SNE visualizations of the latent space of 3DGS for the
+          same scene with 36 linearly interpolated SO(3) rotations from 0 to
+          360 degrees. (a) (b) and (c) are the latent visualization of same scenes but different rotations around X-axis, Y-axis and Z-axis, respectively. 
+          (d) is the color map corresponding to varying rotation degrees.
+          All three rotations exhibit patterns of closed loops,
+          demonstrating that our model preserves spatial information in the
+          latent representations. In (e) and (f), <span style="color: red;">red</span> dots are latent embeddings of the same scene but with 200 random SO(3) rotations and
+          <span style="color: blue;">blue</span> dots are latent embeddings of different scenes.
+        </p>
+      <!--/ Interpolating. -->
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Semantics-aware Filtering (optional)</h2>
+        <!-- Interpolating. -->
+        <img src="./static/images/semantic_filtering.png" class="interpolation-image" alt="Interpolate start reference image."/>
+        <p>
+          3DGS reconstructions from
+          general scenes often contain noise artifacts like floaters due
+          to the lack of visual observations (unlike objects which are
+          normally captured with sufficient views). To address this issue, we apply semantic-guided filtering
+          to the raw 3DGS input to subsample as-clean-as-possible
+          3DGS primitives. As shown in the figure, such semantic filtering can preserve the most semantically meaningful contents while removing the less salient
+          and noisy Gaussians. Please refer to the paper for more details.
+        </p>
+      <!--/ Interpolating. -->
+      </div>
+    </div>
+
+
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">More Results</h2>
+        <!-- Interpolating. -->
+        <img src="./static/images/more_results.png" class="interpolation-image" alt="Interpolate start reference image."/>
+
+      <!--/ Interpolating. -->
+      </div>
+    </div>
+
+    <!--/ Method. -->
+    <br />
     <!-- Results -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Results</h2>
-        <h3 class="title is-4">1. Text-to-3D Generation</h3>
+        <h2 class="title is-3">Downstreaming Applications</h2>
+        <br />
+        Our Can3Tok can be used for various downstream tasks. Besides 3D compression (into latents), we demonstrate two applications: text-to-3DGS generation and image-to-3DGS generation.
+        <br />
+
+        <br />
+        <h3 class="title is-4">1. Text-to-3D Generation (Sec. 4.6)</h3>
         <img src="./static/images/text-to-3d.png" class="interpolation-image" alt="Empty"/> 
         <br />
         <br />
-        <h3 class="title is-4">2. Image-to-3D Generation</h3>
-        <img src="./static/images/img-to-3d.png" class="interpolation-image" alt="Empty"/>
+        <h3 class="title is-4">2. Image-to-3D Generation (Sec. 4.6 and Appendix)</h3>
+        <img src="./static/images/image-to-3d.png" class="interpolation-image" alt="Empty"/>
         <br />
-        <p>
-          <br />
-          Visualization of optical and Gaussian flows on the input view and a novel view. ``Ours (no flow)'' denotes our model without flow supervision while ``Ours'' is our full model. Note that optical flow values of the background should be ignored because dense optical flow algorithms calculate correspondences among background pixels. We calculate optical flow $flow^o_{t_1t_2}$ on rendered sequences by autoflow. From the $\#$1 and the $\#$4 column, we can see that both rendered sequences on input view have high-quality optical flow, indicating correct motions and appearance. Comparing Gaussian flows at the $\#$2 and the $\#$5 column, we can see that the underlining Gaussians will move inconsistently without flow supervision. It is due to the ambiguity of appearance and motions while only being optimized by photometric loss on a single input view. Aligning Gaussian flow to optical flow can drastically improve irregular motions ( $\#$3 column) and create high-quality dynamic motions ($\#$6 column) on novel views.
-        </p>
-        <br />
-   
-        <h4 class="title is-5">More Results</h4>
-        <img src="./static/images/more_results.png" class="interpolation-image" alt="Empty"/>
-        <br />
-        <br />
-
-        
-        
       
-        
     
-        <!-- <video class="video_back" src="./static/videos/dynerf_comp_texture.mp4" muted playsinline autoplay="autoplay" loop="loop">
-        </video>
-        <video class="video_back" src="./static/videos/dynerf_comp_depth.mp4" muted playsinline autoplay="autoplay" loop="loop">
-        </video>  -->
-
 
          <br /> 
         <h2 class="title is-3">Acknowledgments</h2>
         <p>
           <br />
-          We thank the following great works <a href="https://arxiv.org/abs/2107.14795">Perceiver IO</a>, <a href="https://github.com/NeuralCarver/Michelangelo">Michelangelo</a>, <a href="https://github.com/luca-medeiros/lang-segment-anything">LangSAM</a>, <a href="https://github.com/POSTECH-CVLab/point-transformer">PointTransformer</a>, and <a href="https://github.com/graphdeco-inria/gaussian-splatting">3DGS</a> for their codes.
+          We thank the following great works <a href="https://arxiv.org/abs/2107.14795">Perceiver IO</a>, <a href="https://github.com/NeuralCarver/Michelangelo">Michelangelo</a>, <a href="https://github.com/luca-medeiros/lang-segment-anything">LangSAM</a>, <a href="https://github.com/POSTECH-CVLab/point-transformer">PointTransformer</a>, <a href="https://dl3dv-10k.github.io/DL3DV-10K/">DL3DV-10K dataset</a> and <a href="https://github.com/graphdeco-inria/gaussian-splatting">3DGS</a> for their codes.
         </p>
       </div>
     </div>
